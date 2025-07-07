@@ -5,6 +5,7 @@ resource "aws_lb" "main" {
   security_groups            = [aws_security_group.lb.id]
   subnets                    = var.vpc.public_subnets
   enable_deletion_protection = true
+  drop_invalid_header_fields = true
 
   access_logs {
     bucket  = module.s3_bucket_for_logs.s3_bucket_id
