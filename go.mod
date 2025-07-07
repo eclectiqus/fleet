@@ -1,6 +1,8 @@
 module github.com/fleetdm/fleet/v4
 
-go 1.19
+go 1.23.0
+
+toolchain go1.23.10
 
 require (
 	cloud.google.com/go/pubsub v1.30.0
@@ -104,7 +106,7 @@ require (
 	golang.org/x/crypto v0.1.0
 	golang.org/x/exp v0.0.0-20230105202349-8879d0199aa3
 	golang.org/x/net v0.8.0
-	golang.org/x/oauth2 v0.6.0
+	golang.org/x/oauth2 v0.27.0
 	golang.org/x/sync v0.1.0
 	golang.org/x/sys v0.6.0
 	google.golang.org/grpc v1.54.0
@@ -116,8 +118,7 @@ require (
 
 require (
 	cloud.google.com/go v0.110.0 // indirect
-	cloud.google.com/go/compute v1.19.0 // indirect
-	cloud.google.com/go/compute/metadata v0.2.3 // indirect
+	cloud.google.com/go/compute/metadata v0.3.0 // indirect
 	cloud.google.com/go/iam v0.13.0 // indirect
 	cloud.google.com/go/kms v1.10.0 // indirect
 	cloud.google.com/go/storage v1.28.1 // indirect
@@ -243,7 +244,6 @@ require (
 	github.com/jonboulle/clockwork v0.2.2 // indirect
 	github.com/kevinburke/ssh_config v1.1.0 // indirect
 	github.com/klauspost/compress v1.15.11 // indirect
-	github.com/lib/pq v1.10.6 // indirect
 	github.com/lufia/plan9stats v0.0.0-20211012122336-39d0f177ccd0 // indirect
 	github.com/magiconair/properties v1.8.5 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
@@ -293,7 +293,6 @@ require (
 	github.com/xrash/smetrics v0.0.0-20201216005158-039620a65673 // indirect
 	github.com/yashtewari/glob-intersection v0.1.0 // indirect
 	github.com/yusufpapurcu/wmi v1.2.2 // indirect
-	github.com/ziutek/mymysql v1.5.4 // indirect
 	go.elastic.co/apm v1.15.0 // indirect
 	go.elastic.co/apm/module/apmhttp/v2 v2.3.0 // indirect
 	go.elastic.co/fastjson v1.1.0 // indirect
