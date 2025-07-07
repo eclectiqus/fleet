@@ -739,10 +739,13 @@ func (ds *Datastore) UpsertSoftwareCPEs(ctx context.Context, cpes []fleet.Softwa
 		return 0, nil
 	}
 
-	values := strings.TrimSuffix(strings.Repeat("(?,?),", len(cpes)), ",")
+	placeholders := make([]string, len(cpes))
+	for i := range placeholders {
+		placeholders[i] = "(?,?)"
+	}
 	sql := fmt.Sprintf(
 		`INSERT INTO software_cpe (software_id, cpe) VALUES %s ON DUPLICATE KEY UPDATE cpe = VALUES(cpe)`,
-		values,
+		strings.Join(placeholders, ","),
 	)
 
 	for _, cpe := range cpes {
@@ -813,9 +816,13 @@ func (ds *Datastore) DeleteSoftwareVulnerabilities(ctx context.Context, vulnerab
 		return nil
 	}
 
+	placeholders := make([]string, len(vulnerabilities))
+	for i := range placeholders {
+		placeholders[i] = "(?,?)"
+	}
 	sql := fmt.Sprintf(
 		`DELETE FROM software_cve WHERE (software_id, cve) IN (%s)`,
-		strings.TrimSuffix(strings.Repeat("(?,?),", len(vulnerabilities)), ","),
+		strings.Join(placeholders, ","),
 	)
 	var args []interface{}
 	for _, vulnerability := range vulnerabilities {
