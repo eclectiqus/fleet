@@ -632,7 +632,7 @@ func countSoftwareDB(
 		return 0, ctxerr.Wrap(ctx, err, "sql build")
 	}
 
-	sql = `SELECT COUNT(DISTINCT s.id) FROM (` + sql + `) AS s`
+	sql = "SELECT COUNT(DISTINCT s.id) FROM (" + sql + ") AS s"
 
 	var count int
 	if err := sqlx.GetContext(ctx, q, &count, sql, args...); err != nil {
@@ -742,9 +742,9 @@ func (ds *Datastore) UpsertSoftwareCPEs(ctx context.Context, cpes []fleet.Softwa
 	placeholders := make([]string, len(cpes))
 	for i := range placeholders {
 		placeholders[i] = "(?,?)"
-	}
-	sql := fmt.Sprintf(
-		`INSERT INTO software_cpe (software_id, cpe) VALUES %s ON DUPLICATE KEY UPDATE cpe = VALUES(cpe)`,
+	sql := "INSERT INTO software_cpe (software_id, cpe) VALUES " + 
+		strings.Join(placeholders, ",") + 
+		" ON DUPLICATE KEY UPDATE cpe = VALUES(cpe)"
 		strings.Join(placeholders, ","),
 	)
 
@@ -815,13 +815,13 @@ func (ds *Datastore) DeleteSoftwareVulnerabilities(ctx context.Context, vulnerab
 	if len(vulnerabilities) == 0 {
 		return nil
 	}
-
 	placeholders := make([]string, len(vulnerabilities))
 	for i := range placeholders {
 		placeholders[i] = "(?,?)"
 	}
-	sql := fmt.Sprintf(
-		`DELETE FROM software_cve WHERE (software_id, cve) IN (%s)`,
+	sql := "DELETE FROM software_cve WHERE (software_id, cve) IN (" + 
+		strings.Join(placeholders, ",") + 
+		")"
 		strings.Join(placeholders, ","),
 	)
 	var args []interface{}
